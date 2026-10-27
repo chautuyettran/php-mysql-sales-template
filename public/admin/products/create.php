@@ -228,7 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmtImage->close();
                     $conn->commit();
 
-                    header('Location: /products/');
+                    header('Location: /admin/products/');
+
                     exit;
 
                 } catch (Throwable $e) {
@@ -484,7 +485,7 @@ require_once '/var/www/src/includes/navbar.php';
             Lưu
         </button>
 
-        <a href="/products/" class="btn btn-secondary">
+        <a href="/admin/products/" class="btn btn-secondary">
             Hủy
         </a>
 

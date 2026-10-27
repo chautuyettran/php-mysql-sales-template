@@ -11,7 +11,7 @@ $success = '';
 $productID = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if ($productID <= 0) {
-    header('Location: /products/');
+    header('Location: /admin/products/');
     exit;
 }
 
@@ -25,7 +25,7 @@ $product = $result->fetch_assoc();
 $stmt->close();
 
 if (!$product) {
-    header('Location: /products/');
+    header('Location: /admin/products/');
     exit;
 }
 
@@ -70,7 +70,7 @@ if (isset($_POST['set_primary_image'])) {
         $conn->commit();
 
         header(
-            'Location: /products/edit.php?id='
+            'Location: /admin/products/edit.php?id='
             . $productID
             . '&primary_updated=1'
         );
@@ -238,7 +238,7 @@ if (isset($_POST['add_images'])) {
                 $conn->commit();
 
                 header(
-                    'Location: /products/edit.php?id='
+                    'Location: /admin/products/edit.php?id='
                     . $productID
                     . '&images_added=1'
                 );
@@ -378,7 +378,7 @@ if (isset($_POST['delete_image'])) {
         }
 
         header(
-            'Location: /products/edit.php?id='
+            'Location: /admin/products/edit.php?id='
             . $productID
             . '&image_deleted=1'
         );
@@ -450,7 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($stmt->execute()) {
-            header('Location: /products/');
+            header('Location: /admin/products/');
             exit;
         } else {
             $error = 'Không thể cập nhật sản phẩm: ' . $stmt->error;
@@ -705,7 +705,7 @@ require_once '/var/www/src/includes/navbar.php';
                                         class="btn btn-outline-primary btn-sm"
                                         name="set_primary_image"
                                         value="<?= $image['ProductImageID'] ?>"
-                                        formaction="/products/edit.php?id=<?= $productID ?>"
+                                        formaction="/admin/products/edit.php?id=<?= $productID ?>"
                                         formmethod="post"
                                     >
                                         Đặt làm ảnh chính
@@ -719,7 +719,7 @@ require_once '/var/www/src/includes/navbar.php';
                                     class="btn btn-outline-danger btn-sm"
                                     name="delete_image"
                                     value="<?= $image['ProductImageID'] ?>"
-                                    formaction="/products/edit.php?id=<?= $productID ?>"
+                                    formaction="/admin/products/edit.php?id=<?= $productID ?>"
                                     formmethod="post"
                                     onclick="return confirm('Bạn có chắc muốn xóa ảnh này?');"
                                 >
@@ -757,7 +757,7 @@ require_once '/var/www/src/includes/navbar.php';
             class="btn btn-outline-success mb-3"
             name="add_images"
             value="1"
-            formaction="/products/edit.php?id=<?= $productID ?>"
+            formaction="/admin/products/edit.php?id=<?= $productID ?>"
             formmethod="post"
         >
             Thêm ảnh
@@ -782,7 +782,7 @@ require_once '/var/www/src/includes/navbar.php';
             Cập nhật
         </button>
 
-        <a href="/products/" class="btn btn-secondary">
+        <a href="/admin/products/" class="btn btn-secondary">
             Hủy
         </a>
 
